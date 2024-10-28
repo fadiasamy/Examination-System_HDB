@@ -1,0 +1,65 @@
+﻿@model Examination_System.Models.Answer
+
+<div class="container mt-5">
+    <h4 class="text-center">Create New Answer</h4>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="CreateAnswer" class="border p-4 rounded shadow">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" asp-for="Question_Id" />
+
+                <div class="form-group">
+                    <label asp-for="Answer_text" class="control-label font-weight-bold"></label>
+                    <input asp-for="Answer_text" class="form-control" placeholder="Enter your answer here" />
+                    <span asp-validation-for="Answer_text" class="text-danger"></span>
+                </div>
+
+                <div class="form-group form-check">
+                    <input class="form-check-input" asp-for="Is_correct" />
+                    <label class="form-check-label" asp-for="Is_correct">Mark as correct answer</label>
+                </div>
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Create" class="btn btn-primary btn-lg" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <a asp-action="EditQuestion" asp-route-id="@Model.Question_Id" class="btn btn-link btn btn-secondary ">Back to Question</a>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 600px; 
+        margin: auto; 
+    }
+
+    h4 {
+        margin-bottom: 20px; 
+    }
+
+    form {
+        background-color: #f8f9fa; 
+    }
+
+    .form-group label {
+        color: #333; 
+    }
+
+    .btn {
+        font-size: 18px; 
+    }
+
+    .text-danger {
+        font-size: 0.9em; 
+    }
+
+    form {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+</style>

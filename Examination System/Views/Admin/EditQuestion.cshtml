@@ -1,0 +1,76 @@
+﻿@model Examination_System.Models.Question
+
+<h4>Edit Question</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditQuestion" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Question_Id" />
+            <div class="form-group">
+                <label asp-for="Question_Text" class="control-label"></label>
+                <input asp-for="Question_Text" class="form-control" />
+                <span asp-validation-for="Question_Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Question_Score" class="control-label"></label>
+                <input asp-for="Question_Score" class="form-control" />
+                <span asp-validation-for="Question_Score" class="text-danger"></span>
+            </div>
+            <div>
+                <h5>Answers</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Answer Text</th>
+                            <th>Is Correct</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Answers != null && Model.Answers.Any())
+                        {
+                            int index = 0;
+                            foreach (var answer in Model.Answers)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="hidden" name="Answers[@index].Answer_Id" value="@answer.Answer_Id" />
+                                        <input type="text" name="Answers[@index].Answer_text" class="form-control" value="@answer.Answer_text" required />
+                                        <span asp-validation-for="Answers[@index].Answer_text" class="text-danger"></span>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="Answers[@index].Is_correct" value="true" class="form-check-input" @(answer.Is_correct ? "checked" : "") />
+                                        <input type="hidden" name="Answers[@index].Is_correct" value="false" />
+                                    </td>
+                                    <td>
+                                        <input type="hidden" name="Answers[@index].Question_Id" value="@Model.Question_Id" />
+                                        <a asp-action="EditAnswer" asp-route-id="@answer.Answer_Id">Edit</a> |
+                                        <a asp-action="DeleteAnswer" asp-route-id="@answer.Answer_Id">Delete</a>
+                                    </td>
+                                </tr>
+                                index++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="3">No answers available.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a asp-action="CreateAnswer" asp-route-questionId="@Model.Question_Id" class="btn btn-success mb-xxl-1">Add Answer</a>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Questions" class="btn btn-secondary ">Back to List</a>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    
+</div>

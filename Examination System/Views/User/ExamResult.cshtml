@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Exam Result";
+}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Exam Result</h2>
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">Your Score: @ViewBag.Score</h5>
+            <p class="card-text">Congratulations on completing the exam! Here are your options:</p>
+            <a asp-action="Results" class="btn btn-primary">View All Results</a>
+            <a asp-controller="User" asp-action="GenerateExam" class="btn btn-success">Generate New Exam</a>
+        </div>
+    </div>
+</div>

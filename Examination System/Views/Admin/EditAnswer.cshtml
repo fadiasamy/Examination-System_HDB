@@ -1,0 +1,30 @@
+﻿@model Examination_System.Models.Answer
+
+<h4>Edit Answer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditAnswer">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Answer_Id" />
+            <div class="form-group">
+                <label asp-for="Answer_text" class="control-label"></label>
+                <input asp-for="Answer_text" class="form-control" />
+                <span asp-validation-for="Answer_text" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Is_correct" /> @Html.DisplayNameFor(model => model.Is_correct)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="EditQuestion" asp-route-id="@Model.Question_Id" class="btn btn-secondary ">Back to Question</a>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+</div>

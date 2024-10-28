@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Question>
+
+@{
+    ViewData["Title"] = "Generate Exam";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Generate Exam</h2>
+
+    <form asp-action="SubmitExam" method="post">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            var question = Model.ElementAt(i);
+            <div class="mb-4">
+                <h5>@question.Question_Text</h5>
+
+                @if (question.Answers != null && question.Answers.Any())
+                {
+                    foreach (var answer in question.Answers)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="selectedAnswers[@i]" value="@answer.Answer_Id" id="answer_@answer.Answer_Id">
+                            <label class="form-check-label" for="answer_@answer.Answer_Id">
+                                @answer.Answer_text
+                            </label>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No answers available for this question.</p>
+                }
+                <input type="hidden" name="questionIds[@i]" value="@question.Question_Id" />
+            </div>
+        }
+        <button type="submit" class="btn btn-primary">Submit Exam</button>
+    </form>
+</div>
