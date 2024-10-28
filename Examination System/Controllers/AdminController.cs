@@ -88,11 +88,9 @@ namespace Examination_System.Controllers
 
                 if (existingQuestion != null)
                 {
-                    // تحديث خصائص السؤال
                     existingQuestion.Question_Text = question.Question_Text;
                     existingQuestion.Question_Score = question.Question_Score;
 
-                    // حذف الإجابات الحالية وإضافة الجديدة
                     _context.Answers.RemoveRange(existingQuestion.Answers);
                     foreach (var answer in question.Answers)
                     {
@@ -106,7 +104,6 @@ namespace Examination_System.Controllers
             }
             else
             {
-                // طباعة الأخطاء الموجودة
                 foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
                 {
                     Console.WriteLine(error.ErrorMessage);
